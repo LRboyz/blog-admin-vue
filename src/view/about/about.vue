@@ -42,10 +42,6 @@
               </li>
             </ul>
           </div>
-          <div class="team-icon">
-            <img src="../../assets/image/about/qrcode.jpg" alt />
-          </div>
-          <p class="team-label">LRboy WeChat</p>
         </div>
       </div>
     </div>
@@ -130,14 +126,16 @@
         <div class="article-title">文章</div>
         <div class="article-list">
           <div class="article-item" @click="handleArticle('https://opensource.guide/how-to-contribute/')">
-            <img class="article-thumb" src="../../assets/image/about/open-source.jpg" alt />
+            <img
+              class="article-thumb"
+              src="http://www.lrboy.live/2020/11/03/0efbb944-1da2-11eb-9b72-f45c89cb3825.png"
+              alt
+            />
             <div class="article-detail">
-              <p class="article-detail-title">How to Contribute to Open Source?</p>
+              <p class="article-detail-title">「算法与数据结构」二叉树之美</p>
               <div class="article-detail-content">
-                Whether you just made your first open source contribution, or you’re looking for new ways to contribute,
-                we hope you’re inspired to take action. Even if your contribution wasn’t accepted, don’t forget to say
-                thanks when a maintainer put effort into helping you. Open source is made by people like you: one issue,
-                pull request, comment, or high-five at a time.
+                这次梳理的内容是数据结构专题中的树，如果你看到树这类数据结构时，满脑子头疼，觉得它很难理解，如果是这样子的话，那么本文可能对你或许有点帮助。
+                俗话说得好，要想掌握理解的话，我们得先了解它的概念，性质等内容。
               </div>
               <div class="article-tool">
                 <div class="pubdate">一天前</div>
@@ -152,11 +150,17 @@
             </div>
           </div>
           <div class="article-item" @click="handleArticle('https://www.zhihu.com/question/269033309')">
-            <img class="article-thumb" src="../../assets/image/about/open-source.jpg" alt />
+            <img
+              class="article-thumb"
+              src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3866427781,859233610&fm=26&gp=0.jpg"
+              alt
+            />
             <div class="article-detail article-last">
-              <p class="article-detail-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</p>
+              <p class="article-detail-title">Vue3快速上手</p>
               <div class="article-detail-content">
-                “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
+                Vue3快速上手 Vue3-admin 快速上手实战项目 1、vue3中全部采用函数式写法，替换了原来类的写法，
+                2、移除了原有的生命周期函数，和data、computed、watch、method等vue2中的对象，去掉了this,
+                并且去除了过滤器api -> filter
               </div>
               <div class="article-tool">
                 <div class="pubdate">2019年5月26日</div>

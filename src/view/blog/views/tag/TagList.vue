@@ -96,7 +96,7 @@ export default {
     },
     async handleEdit(val) {
       this.showEdit = true
-      this.id = val.row.id
+      this.id = val.row._id
     },
     async handleCurrentChange(val) {
       this.pagination.currentPage = val

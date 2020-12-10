@@ -92,7 +92,7 @@
     </div>
     <!-- 弹窗 -->
     <el-dialog :append-to-body="true" :before-close="handleClose" :visible.sync="dialogFormVisible">
-      <div style="margin-top:-25px;">
+      <div style="margin-top: -25px;">
         <el-tabs v-model="activeTab" @tab-click="handleClick">
           <el-tab-pane label="修改信息" name="修改信息">
             <user-info
@@ -177,18 +177,7 @@ export default {
     },
     // 获取所拥有的权限并渲染  由子组件提供
     async handleEdit(val) {
-      // console.log(val)
-      // this.editIndex = val.index
-      // let selectedData
-      // // 单击 编辑按键
-      // if (val.index >= 0) {
-      //   selectedData = val.row
-      // } else {
-      //   // 单击 table row
-      //   selectedData = val
-      // }
-      this.id = val.user_id
-      // this.is_admin = selectedData.admin
+      this.id = val.id
       this.form.username = val.username
       this.form.email = val.email
       this.form.role = val.role
@@ -220,7 +209,7 @@ export default {
       }).then(async () => {
         try {
           this.loading = true
-          res = await Admin.deleteOneUser(val.user_id)
+          res = await Admin.deleteOneUser(val.id)
         } catch (e) {
           this.loading = false
           console.log(e)

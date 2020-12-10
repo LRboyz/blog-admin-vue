@@ -53,7 +53,7 @@
                 <el-col :lg="6">
                   <el-form-item label="标签" prop="source">
                     <el-select
-                      style="width:100%;"
+                      style="width: 100%;"
                       v-model="form.tags"
                       multiple
                       allow-create

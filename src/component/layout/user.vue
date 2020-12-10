@@ -343,7 +343,7 @@ export default {
     },
     init() {
       const { user, role } = this.$store.state
-      console.log(user)
+      // console.log(user)
       this.username = user ? user.username : '未登录'
       this.groupName = user ? role[user.role] : '普通用户'
       this.nickname = user && user.nickname ? user.nickname : '佚名'
