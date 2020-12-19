@@ -51,7 +51,7 @@
           <div class="quantity-detail-box">
             <div class="quantity-title">总访问量</div>
             <div class="quantity-border-line"></div>
-            <div class="quantity">11,590</div>
+            <div class="quantity">1660</div>
           </div>
         </div>
         <div class="quantity-icon">
@@ -63,7 +63,7 @@
           <div class="quantity-detail-box">
             <div class="quantity-title">总用户数</div>
             <div class="quantity-border-line"></div>
-            <div class="quantity">51,862</div>
+            <div class="quantity">52</div>
           </div>
         </div>
         <div class="quantity-icon">
@@ -75,7 +75,7 @@
           <div class="quantity-detail-box">
             <div class="quantity-title">新增访问量 (月)</div>
             <div class="quantity-border-line"></div>
-            <div class="quantity">1,862</div>
+            <div class="quantity">182</div>
           </div>
         </div>
         <div class="quantity-icon">
@@ -87,7 +87,7 @@
           <div class="quantity-detail-box">
             <div class="quantity-title">新增用户数</div>
             <div class="quantity-border-line"></div>
-            <div class="quantity">1,323</div>
+            <div class="quantity">13</div>
           </div>
         </div>
         <div class="quantity-icon">
@@ -115,61 +115,36 @@
         </div>
         <el-tabs v-model="activeName" class="personal-tabs">
           <el-tab-pane label="最新作品" name="first">
-            <div class="content">How to Contribute to Open Source?</div>
+            <p class="content">
+              <a href="https://github.com/bhb603552916/lrblog-vue" target="_blank">LRBlog(已上线)</a>
+            </p>
+            <p class="content">
+              <a href="https://github.com/bhb603552916/blog-admin-vue" target="_blank">LRBlog-CMS(已上线)</a>
+            </p>
           </el-tab-pane>
-          <el-tab-pane label="最热作品" name="second">
-            <div class="content">为什么程序员们愿意在GitHub上开源...</div>
+          <el-tab-pane label="其他作品" name="second">
+            <p class="content">敬请期待...</p>
           </el-tab-pane>
         </el-tabs>
       </div>
       <div class="article">
         <div class="article-title">文章</div>
         <div class="article-list">
-          <div class="article-item" @click="handleArticle('https://opensource.guide/how-to-contribute/')">
-            <img
-              class="article-thumb"
-              src="http://www.lrboy.live/2020/11/03/0efbb944-1da2-11eb-9b72-f45c89cb3825.png"
-              alt
-            />
-            <div class="article-detail">
-              <p class="article-detail-title">「算法与数据结构」二叉树之美</p>
-              <div class="article-detail-content">
-                这次梳理的内容是数据结构专题中的树，如果你看到树这类数据结构时，满脑子头疼，觉得它很难理解，如果是这样子的话，那么本文可能对你或许有点帮助。
-                俗话说得好，要想掌握理解的话，我们得先了解它的概念，性质等内容。
-              </div>
-              <div class="article-tool">
-                <div class="pubdate">一天前</div>
-                <div class="article-about">
-                  <span> <i class="iconfont icon-shoucang"></i>37 </span>
-                  <el-divider direction="vertical"></el-divider>
-                  <span> <i class="iconfont icon-pinglun"></i>2384 </span>
-                  <el-divider direction="vertical"></el-divider>
-                  <span> <i class="iconfont icon-fenxiang"></i>56 </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="article-item" @click="handleArticle('https://www.zhihu.com/question/269033309')">
-            <img
-              class="article-thumb"
-              src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3866427781,859233610&fm=26&gp=0.jpg"
-              alt
-            />
+          <div class="article-item" v-for="(item, index) in articles" :key="index">
+            <img class="article-thumb" :src="item.banner" alt />
             <div class="article-detail article-last">
-              <p class="article-detail-title">Vue3快速上手</p>
+              <p class="article-detail-title">{{ item.title }}</p>
               <div class="article-detail-content">
-                Vue3快速上手 Vue3-admin 快速上手实战项目 1、vue3中全部采用函数式写法，替换了原来类的写法，
-                2、移除了原有的生命周期函数，和data、computed、watch、method等vue2中的对象，去掉了this,
-                并且去除了过滤器api -> filter
+                {{ item.introduction }}
               </div>
               <div class="article-tool">
-                <div class="pubdate">2019年5月26日</div>
+                <div class="pubdate">{{ item.pub_time }}</div>
                 <div class="article-about">
-                  <span> <i class="iconfont icon-shoucang"></i>37 </span>
+                  <span> <i class="iconfont icon-shoucang"></i>{{ item.likes }}</span>
                   <el-divider direction="vertical"></el-divider>
-                  <span> <i class="iconfont icon-pinglun"></i>2384 </span>
+                  <span> <i class="iconfont icon-pinglun"></i>{{ item.commentsCount }}</span>
                   <el-divider direction="vertical"></el-divider>
-                  <span> <i class="iconfont icon-fenxiang"></i>56 </span>
+                  <span> <i class="el-icon-view" style="margin-right: 5px;"></i>{{ item.views }} </span>
                 </div>
               </div>
             </div>
@@ -181,21 +156,35 @@
 </template>
 
 <script>
+/* eslint-disable */
+import articleApi from '../../model/article'
 export default {
   data() {
     return {
       activeName: 'first',
       showTeam: false,
+      articles: [],
     }
   },
   mounted() {
+    this.getArticles()
     if (document.body.clientWidth > 1200 && document.body.clientWidth < 1330) {
       this.showTeam = true
     }
   },
   methods: {
-    handleArticle(link) {
-      window.open(link)
+    async getArticles() {
+      try {
+        this.loading = true
+        const res = await articleApi.getArticles({
+          count: 3,
+          page: 1,
+        })
+        this.articles = res.articles
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }
@@ -269,19 +258,15 @@ export default {
         background: rgba(255, 176, 139, 1);
         box-shadow: 0px 2px 14px 0px rgba(243, 243, 243, 1);
         border-radius: 8px;
-
         .team-box {
           margin: 20px 0 0 22px;
-
           .team-ul {
             margin-top: 15px;
-
             li {
               height: 20px;
               line-height: 20px;
               margin-bottom: 15px;
               font-size: 14px;
-
               .shadow-box {
                 position: relative;
                 display: inline-block;
@@ -291,7 +276,6 @@ export default {
                 border-radius: 14px;
                 background-color: #fff;
                 transform: translateY(2px);
-
                 .team-shadow {
                   position: absolute;
                   top: 25%;
@@ -303,7 +287,6 @@ export default {
                   background-color: #ffb9a4;
                 }
               }
-
               .team-role {
                 display: inline-block;
                 width: 30px;
@@ -311,14 +294,11 @@ export default {
                 font-weight: 400;
                 color: #45526b;
               }
-
               .team-name {
                 font-weight: 400;
                 color: #fff;
-
                 ul {
                   display: inline;
-
                   li {
                     display: inline;
                     margin-right: 15px;
@@ -328,7 +308,6 @@ export default {
             }
           }
         }
-
         .team-icon {
           position: absolute;
           top: 25%;
@@ -340,7 +319,6 @@ export default {
           align-items: center;
           background-color: #fff;
           box-shadow: 0 0 10px 0 #cfd5e3;
-
           img {
             width: 62px;
             height: 62px;
@@ -469,6 +447,18 @@ export default {
       }
       .personal-tabs {
         margin-bottom: 20px;
+        .content {
+          padding: 10px;
+          line-height: 20px;
+          > a {
+            font-style: italic;
+            font-size: 14px;
+          }
+          > a:hover {
+            color: #3963bc;
+            font-weight: bold;
+          }
+        }
       }
       .personal-tabs /deep/ .is-top {
         width: 320px;
@@ -500,7 +490,6 @@ export default {
           display: flex;
           flex-direction: row;
           justify-content: flex-start;
-
           .article-thumb {
             width: 120px;
             height: 120px;

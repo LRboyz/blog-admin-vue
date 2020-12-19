@@ -9,15 +9,15 @@ const blogRouter = {
   order: null,
   inNav: true,
   children: [
-    {
-      name: null,
-      title: '技术频道管理',
-      type: 'view',
-      name: 'ClassifyList',
-      route: '/classify/list',
-      filePath: 'view/blog/views/classify/ClassifyList.vue',
-      inNav: true,
-    },
+    // {
+    //   name: null,
+    //   title: '技术频道管理',
+    //   type: 'view',
+    //   name: 'ClassifyList',
+    //   route: '/classify/list',
+    //   filePath: 'view/blog/views/classify/ClassifyList.vue',
+    //   inNav: true,
+    // },
     {
       name: null,
       title: '分类专栏频道',

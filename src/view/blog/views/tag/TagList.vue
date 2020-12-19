@@ -113,7 +113,7 @@ export default {
       }).then(async () => {
         try {
           this.loading = true
-          res = await tagApi.deleteTag(val.row.id)
+          res = await tagApi.deleteTag(val.row._id)
         } catch (e) {
           this.loading = false
         }
@@ -173,8 +173,8 @@ export default {
       },
     ]
     this.operate = [
-      { name: '编辑', func: 'handleEdit', type: 'primary', auth: '编辑标签' },
-      { name: '删除', func: 'handleDelete', type: 'danger', auth: '删除标签' },
+      { name: '编辑', func: 'handleEdit', type: 'primary' },
+      { name: '删除', func: 'handleDelete', type: 'danger' },
     ]
     await this.getTags()
   },
